@@ -20,8 +20,9 @@ public class RoleEntity extends BaseEntity {
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Collection<UserEntity> users = new HashSet<>();
 
-    public RoleEntity(UserRoleEnum userRoleEnum) {
+    public RoleEntity(UserRoleEnum userRoleEnum, UserEntity user) {
         this.id = userRoleEnum.getId();
         this.name = userRoleEnum.name();
+        this.users.add(user);
     }
 }

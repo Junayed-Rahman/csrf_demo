@@ -14,7 +14,6 @@ import java.util.HashSet;
 @Table(name = "roles")
 public class RoleEntity extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "name")
     private String name;

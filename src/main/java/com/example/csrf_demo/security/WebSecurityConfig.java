@@ -1,8 +1,10 @@
 package com.example.csrf_demo.security;
 
+import com.example.csrf_demo.enums.UserRoleEnum;
 import com.example.csrf_demo.service.MyUserDetailsService;
 import com.example.csrf_demo.service.UserService;
 import lombok.AllArgsConstructor;
+import org.hibernate.cfg.AvailableSettings;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,6 +15,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+
+import static com.example.csrf_demo.enums.UserRoleEnum.ADMIN;
+import static com.example.csrf_demo.enums.UserRoleEnum.USER;
+
 
 @Configuration
 @EnableWebSecurity
@@ -21,16 +28,19 @@ public class WebSecurityConfig {
 
     private MyUserDetailsService userService;
 
-    public static final String ROLE_ADMIN = "ADMIN";
-    public static final String ROLE_USER = "USER";
+    public static final String ROLE_ADMIN = ADMIN.name();
+    public static final String ROLE_USER = USER.name();
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf()
-                .disable()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()
                 .authorizeRequests()
-                .anyRequest()
-                .permitAll();
+                .antMatchers("/test").hasRole(ROLE_ADMIN)
+                .antMatchers("/registration/**").permitAll()
+                .and()
+                .formLogin();
         return http.build();
     }
 

@@ -8,6 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class UserRegistrationDto {
-    private long name;
+    private String name;
     private String password;
+    private String email;
 }

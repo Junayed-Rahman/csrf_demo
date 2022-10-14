@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="public/base::layout(~{::section})">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
 </head>
 <body>
-$END$
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="my-card">
+                    <h1 class="text-center"> Register Here </h1>
+
+
+                    <form th:action="@{register-process}" method="POST">
+
+                        <div class="form-group mb-3">
+                            <label for="Name">Name:</label>
+                            <input type="text" th:name="name" class="form-control" id="name"  placeholder="Enter Name: ">
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                            <label for="password">Enter password: </label>
+                            <input type="password" th:name="password" class="form-control" id="password"  placeholder="Enter password here: ">
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                            <label for="Email">Enter email: </label>
+                            <input type="email" th:name="email" class="form-control" id="Email"  placeholder="Enter email here: ">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>

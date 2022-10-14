@@ -8,6 +8,7 @@ import java.util.HashSet;
 
 @Getter
 @Setter
+@Table
 @Entity(name = "users")
 public class UserEntity extends BaseEntity {
     @Id

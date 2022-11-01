@@ -1,13 +1,10 @@
 package com.example.csrf_demo.enums;
 
-import com.google.common.collect.Sets;
-import javafx.application.Application;
+import com.example.csrf_demo.utils.SetUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,11 +13,12 @@ import static com.example.csrf_demo.enums.UserPermissionEnum.*;
 @AllArgsConstructor
 @Getter
 public enum UserRoleEnum {
-    USER(1, Sets.newHashSet(USER_READ, USER_WRITE)),
-    ADMIN(2, Sets.newHashSet(ADMIN_READ, ADMIN_WRITE));
+    USER(1, SetUtils.newHashSet(USER_READ, USER_WRITE)),
+    ADMIN(2, SetUtils.newHashSet(ADMIN_READ, ADMIN_WRITE));
+
 
     private final long id;
-    private final HashSet<UserPermissionEnum> permissions;
+    private final Set<UserPermissionEnum> permissions;
 
     public Set<SimpleGrantedAuthority> getGrantedAuthority(){
         Set<SimpleGrantedAuthority> permissions = getPermissions().stream()

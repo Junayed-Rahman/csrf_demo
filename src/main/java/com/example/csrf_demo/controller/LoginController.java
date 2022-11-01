@@ -46,13 +46,13 @@ public class LoginController {
         }
     }
 
-    @PostMapping(value = "/login-process")
-    public String showHomepage(@ModelAttribute UserLoginRequestDto userDto){
-        userService.encodePassword(userDto);
-        UserEntity user = userService.mapDTOToUser(userDto);
-        user = userService.fetchUserByNameAndPassword(userDto);
-        log.info(user.getName() + "is logged in.");
-        System.out.println("Logged in");
-        return "public/UserRegistrationForm";
-    }
+//    @PostMapping(value = "/login-process")
+//    public String showHomepage(@ModelAttribute UserLoginRequestDto userDto){
+//        userService.encodePassword(userDto);
+//        UserEntity user = userService.mapDTOToUser(userDto);
+//        user = userService.fetchUserByNameAndPassword(userDto);
+//        log.info(user.getName() + "is logged in.");
+//        System.out.println("Logged in");
+//        return "public/UserRegistrationForm";
+//    }
 }

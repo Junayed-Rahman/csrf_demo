@@ -3,6 +3,7 @@ package com.example.csrf_demo.controller;
 import com.example.csrf_demo.dto.UserLoginRequestDto;
 import com.example.csrf_demo.dto.UserRegistrationDto;
 import com.example.csrf_demo.entity.UserEntity;
+import com.example.csrf_demo.security.MyUserPrincipal;
 import com.example.csrf_demo.service.RoleService;
 import com.example.csrf_demo.service.UserService;
 import lombok.AllArgsConstructor;
@@ -36,7 +37,7 @@ public class LoginController {
             return "public/UserLoginForm";
         }
         else {
-            Principal principal = (Principal) authentication.getPrincipal();
+            MyUserPrincipal principal = (MyUserPrincipal) authentication.getPrincipal();
             String loggedUserName = ((UserDetails)principal).getUsername();
             model.addAttribute("LoggedUserName", loggedUserName);
             return "public/UserLoginForm";

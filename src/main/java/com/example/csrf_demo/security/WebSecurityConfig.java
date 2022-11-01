@@ -18,6 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
+import java.util.concurrent.TimeUnit;
+
 import static com.example.csrf_demo.enums.UserRoleEnum.ADMIN;
 import static com.example.csrf_demo.enums.UserRoleEnum.USER;
 
@@ -48,8 +50,11 @@ public class WebSecurityConfig {
                 .failureUrl("/login/error")
                 .and()
                 .logout().permitAll()
+                .deleteCookies("JSESSIONID")
                 .and()
-                .rememberMe();
+                .rememberMe()
+                .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
+                .key("secured");
         return http.build();
     }
 

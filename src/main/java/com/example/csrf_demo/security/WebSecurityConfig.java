@@ -45,7 +45,7 @@ public class WebSecurityConfig {
                 .formLogin()
                 .loginPage("/login/form")
                 .loginProcessingUrl("/login/login-process")
-                .failureUrl("/error");
+                .failureUrl("/login/error");
         return http.build();
     }
 
